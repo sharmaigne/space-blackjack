@@ -1,4 +1,4 @@
-local passive = require("src.entities.passive")
+local Passive = require("src.entities.passive")
 
 local passive_list = {
     { name = "Gambler's Fallacy", desc = "3 successive rolls below 3 will guarantee a roll of 6" },
@@ -6,7 +6,7 @@ local passive_list = {
 
 local passives = {}
 for _, p in pairs(passive_list) do
-    local new_passive = passive.new(p.name, p.desc)
+    local new_passive = Passive.new(p.name, p.desc)
     passives[p.name] = new_passive
 end
 

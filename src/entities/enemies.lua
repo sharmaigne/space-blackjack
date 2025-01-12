@@ -1,4 +1,4 @@
-local enemy = require("src.entities.enemy")
+local Enemy = require("src.entities.enemy")
 
 -- name may have spaces
 local enemy_list = {
@@ -7,7 +7,8 @@ local enemy_list = {
 
 local enemies = {}
 for _, e in ipairs(enemy_list) do
-    table.insert(enemies, enemy.new(e.name))
+    local new_enemy = Enemy.new(e.name, e.passives, e.chips, e.max_damage)
+    enemies[e.name] = new_enemy
 end
 
 return enemies

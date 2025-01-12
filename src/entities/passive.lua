@@ -1,17 +1,17 @@
-local passive = {
+local Passive = {
     name = "Passive",
     description = "This is a passive.",
     image = "",
     cost = 0,
 }
-passive.__index = passive
+Passive.__index = Passive
 
---- Constructor for passive
+--- Constructor for class Passive
 -- @param name string name of the passive
 -- @param[opt=""] desc string description of the passive
--- @return passive
-function passive.new(name, desc)
-    local self = setmetatable(passive, passive)
+-- @return Passive
+function Passive.new(name, desc)
+    local self = setmetatable({}, Passive)
 
     self.name = name
     self.description = desc or ""
@@ -22,4 +22,4 @@ function passive.new(name, desc)
     return self
 end
 
-return passive
+return Passive
