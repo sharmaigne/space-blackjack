@@ -1,6 +1,6 @@
 local Passive = {
     name = "Passive",
-    description = "This is a passive.",
+    desc = "This is a passive.",
     image = "",
     cost = 0,
 }
@@ -14,7 +14,7 @@ function Passive.new(name, desc)
     local self = setmetatable({}, Passive)
 
     self.name = name
-    self.description = desc or ""
+    self.desc = desc or ""
 
     self.image = love.graphics.newImage("assets/images/placeholder/passive.png")
     -- imagePath = "assets/images/passives/" .. util.removeSpaces(name) .. ".png",
