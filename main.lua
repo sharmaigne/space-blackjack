@@ -1,3 +1,4 @@
+local player = require("src.entities.player")
 local enemies = require("src.entities.enemies")
 
 function love.load()
