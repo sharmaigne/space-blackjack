@@ -1,4 +1,3 @@
-local player = require("src.entities.player")
 local enemies = require("src.entities.enemies")
 local passives = require("src.entities.passives")
 
