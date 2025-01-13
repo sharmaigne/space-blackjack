@@ -1,25 +1,31 @@
-local Passive = {
-    name = "Passive",
-    desc = "This is a passive.",
-    image = "",
-    cost = 0,
+---@overload fun(tbl: _, opts: Passive)
+local Passive = {}
+setmetatable(Passive --[[@as table]], {
+  __call = function(tbl, opts)
+    return Passive.new(opts)
+  end
+})
+
+---@class Passive
+---@field name string
+---@field desc string
+---@field image love.Image
+---@field cost integer
+---@field opts? table
+Passive.proto = {
+  name = "Missing",
+  desc = "This is a passive.",
+  cost = 0,
+  opts = {},
 }
-Passive.__index = Passive
 
---- Constructor for class Passive
--- @param name string name of the passive
--- @param[opt=""] desc string description of the passive
--- @return Passive
-function Passive.new(name, desc)
-    local self = setmetatable({}, Passive)
+---@param opts Passive
+---@return Passive
+function Passive.new(opts)
+  setmetatable(opts, { __index = Passive.proto })
 
-    self.name = name
-    self.desc = desc or ""
-
-    self.image = love.graphics.newImage("assets/images/placeholder/passive.png")
-    -- imagePath = "assets/images/passives/" .. util.removeSpaces(name) .. ".png",
-    -- image = love.graphics.newImage(imagePath)
-    return self
+  opts.image = love.graphics.newImage("assets/images/passives/" .. opts.name .. ".png")
+  return opts
 end
 
 return Passive

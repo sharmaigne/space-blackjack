@@ -1,28 +1,31 @@
 local Character = require("src.entities.character")
 local util = require("src.core.util")
 
-local Enemy = {
-    name = "",
-    image = "",
+---@overload fun(tbl: _, opts: Enemy)
+local Enemy = {}
+setmetatable(Enemy --[[@as table]], {
+  __call = function(tbl, opts)
+    return Enemy.new(opts)
+  end
+})
+
+---@class Enemy: Character
+---@field name string
+---@field image love.Image
+Enemy.proto = {
+  name = "Missing",
 }
+setmetatable(Enemy.proto, { __index = Character.proto })
 
---- Constructor for class Enemy
--- @param name string name of the enemy
--- @param[opt={}] passives table list of passives
--- @param[opt=0] chips number amount of chips
--- @param[opt=0] max_damage number maximum damage
--- @return Rnemy
-function Enemy.new(name, passives, chips, max_damage)
-    local self = setmetatable(Enemy, Character)
+---@param opts Enemy
+---@return Enemy
+function Enemy.new(opts)
+  setmetatable(opts, { __index = Enemy.proto })
 
-    self.name = name
-    self.passives = passives or {}
-    self.chips = chips or 0
-    self.max_damage = max_damage or 0
+  local imagePath = "assets/images/enemies/" .. util.removeSpaces(opts.name) .. ".png"
+  opts.image = love.graphics.newImage(imagePath)
 
-    local imagePath = "assets/images/enemies/" .. util.removeSpaces(name) .. ".png"
-    self.image = love.graphics.newImage(imagePath)
-    return self
+  return opts
 end
 
 return Enemy
